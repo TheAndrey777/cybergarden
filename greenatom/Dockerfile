@@ -20,3 +20,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "greenatom.dll"]
+
+CMD ["mongod", "--port", "27017"]
