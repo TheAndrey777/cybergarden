@@ -1,4 +1,4 @@
-using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace greenatom
 {
@@ -9,15 +9,19 @@ namespace greenatom
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => options.LoginPath = "/login");
+            builder.Services.AddAuthorization();
 
-            builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddControllers();
+
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            //Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -26,16 +30,10 @@ namespace greenatom
 
             app.UseHttpsRedirection();
 
+            //app.UseAuthentication();
             app.UseAuthorization();
-            app.UseStaticFiles();
 
-            app.UseFileServer(new FileServerOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(builder.Environment.ContentRootPath, "Client")),
-                //RequestPath = "/",
-                EnableDirectoryBrowsing = true
-            });
+            app.UseStaticFiles();
 
             app.MapControllers();
 
