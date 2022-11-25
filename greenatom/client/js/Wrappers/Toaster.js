@@ -15,7 +15,7 @@ class Toaster {
     addToast(toast) {
         let color = DEFAULT_COLOR[toast.color || DEFAULT_COLOR_KEY];
         Toastify({
-            text: (toast.sender ? (toast.sender + "\n") : "") + toast.message || "",
+            text: (toast.title ? (toast.title + "\n") : "") + toast.message || "",
             duration: toast.time || this.defaultTime,
             destination: "",
             newWindow: true,
