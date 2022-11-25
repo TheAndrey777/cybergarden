@@ -21,7 +21,7 @@ class Messenger {
             receive: (response) => {
                 console.log("Connection open")
                 console.log(response)
-                window.open(response.data.URL);
+                window.redirect(response.data.URL);
             },
             cache: (error) => {
                 console.log("Failed connection open")

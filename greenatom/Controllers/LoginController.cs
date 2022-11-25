@@ -31,10 +31,11 @@ namespace greenatom.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginModel model)
         {
-            Console.WriteLine("Logging in...");
+            
             User? user = people.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
             if (user != null)
             {
+                Console.WriteLine("Logging in...");
                 await Authenticate(model.Email); // аутентификация
                 return Redirect("/");
             }
