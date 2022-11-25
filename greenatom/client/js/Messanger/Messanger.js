@@ -4,7 +4,7 @@ class Messenger {
     }
 
     send(request) {
-        axios.get('/'.concat(request.address, "/", request.message))
+        axios.post('/' + request.address, request.message, {responseType: 'document'})
             .then((response) => {
                 if (request.receive) request.receive(response);
             })
@@ -13,13 +13,20 @@ class Messenger {
             });
     }
 
-    connect(login, password) {
-        console.log(1);
+    connect(email, password) {
+        console.log({login: email, password: password})
         this.send({
             address: "login",
-            message: login.concat(",", password),
-            receive: () => console.log("Connection open"),
-            cache: () => console.log("Failed connection open")
+            message: {email: email, password: password},
+            receive: (response) => {
+                console.log("Connection open")
+                console.log(response)
+                window.open(response.data.URL);
+            },
+            cache: (error) => {
+                console.log("Failed connection open")
+                console.log(error)
+            }
         });
     }
 

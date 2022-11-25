@@ -1,5 +1,8 @@
 let messenger = new Messenger();
-messenger.connect("tom@gmail.com", "12345");
+document.getElementById("connectButton").addEventListener("click", () => {
+    console.log("submit")
+   messenger.connect(document.getElementById("email").value, document.getElementById("password").value);
+});
 let count = 1;
 let toaster = new Toaster({});
 setInterval(() => {
