@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using greenatom.Models;
+using greenatom.Services;
 
 namespace greenatom.Controllers
 {
@@ -6,28 +8,18 @@ namespace greenatom.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+        private readonly DatabaseService _databaseService;
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(DatabaseService DbService)
         {
-            _logger = logger;
+            _databaseService = DbService;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet("test1")]
+        public IActionResult Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            //await _databaseService.AddUser(new UserModel { Username = "andreyyyy", Password = "465789" });
+            return Ok();
         }
     }
 }
