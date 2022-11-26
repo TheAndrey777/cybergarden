@@ -15,6 +15,7 @@ namespace greenatom.Controllers
             _logger = logger;
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         public IActionResult GetHtml()
         {
