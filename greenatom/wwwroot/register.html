@@ -7,9 +7,10 @@
 	<link rel="icon" type="image/png" href="images/icons/GreenAtomIco.ico"/>
 
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" href="css/toasts/toast.css">
 </head>
 <body>
 	
@@ -21,67 +22,64 @@
 						Регистрация
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate="Username is reauired">
-						<span class="label-input100">Логин</span>
-						<input class="input100" type="text" name="username" placeholder="Введите e-mail">
+					<div class="wrap-input100 validate-input" data-validate = "Username is reauired">
+						<span class="label-input100">Email</span>
+						<input class="input100" type="text" id="email" placeholder="Введите e-mail">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<span class="label-input100">Пароль</span>
-						<input class="input100" type="password" name="pass" placeholder="Введите пароль">
+						<input class="input100" id="password" type="password" placeholder="Введите пароль">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<span class="label-input100">Повторите пароль</span>
-						<input class="input100" type="password" name="pass" placeholder="Введите пароль">
+						<input class="input100" id="repeatPassword" type="password" name="pass" placeholder="Введите пароль">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn" id="registerButton" type="button">
+								Зарегистрироваться
+							</button>
+						</div>
 					</div>
 
 
-					<span class="label-input100">Я подтверждаю свое согласие с условиями</span>
-					<a href="#"> пользовательского соглашения.</a>
-					<label ><span></span> <input type="checkbox" name="ConfirmedUA"></label>
-			
-			<div class="container-login100-form-btn">
-				<div class="wrap-login100-form-btn">
-					<div class="login100-form-bgbtn"></div>
-					<button class="login100-form-btn" type="button">
-						Зарегистрироваться
-					</button>
-				</div>
+					<div class="flex-col-c100">
+						<a href="/login">
+							Войти
+						</a>
+					</div>
+
+					<div class="txt1">
+						<span>
+							Или зарегистрируйтесь с помощью
+						</span>
+					</div>
+
+					<div class="flex-c-m100">
+						<a href="#" class="login100-social-item bg1">
+							<i class="fa fa-vk"></i>
+						</a>
+
+						<a href="#" class="login100-social-item bg2">
+							<i class="fa fa-google"></i>
+						</a>
+					</div>
+				</form>
 			</div>
-
-
-			<div class="flex-col-c100">
-				<a href="/login">
-					Войти
-				</a>
-			</div>
-
-			<div class="txt1">
-				<span>
-					Или зарегистрируйтесь с помощью
-				</span>
-			</div>
-
-			<div class="flex-c-m100">
-				<a href="#" class="login100-social-item bg1">
-					<i class="fa fa-vk"></i>
-				</a>
-
-				<a href="#" class="login100-social-item bg2">
-					<i class="fa fa-google"></i>
-				</a>
-				<a href="#" class="login100-social-item bg3">
-					<i class='fab fa-discord'></i>
-				</a>
-			</div>
-			</form>
-		</div>
 		</div>
 	</div>
+	<script src="js/Libs/axios/axios.min.js"></script>
+	<script src="js/Libs/ToastLib.js"></script>
+	<script src="js/Wrappers/Toaster.js"></script>
+	<script src="js/Messanger/Messanger.js"></script>
+	<script src="js/Pages/Register/register.js"></script>
 </body>
 </html>

@@ -9,17 +9,17 @@ const DEFAULT_COLOR = {
 
 class Toaster {
     constructor(toaster) {
-        this.defaultTime = toaster.time || DEFAULT_TIME;
+        if (toaster) this._defaultTime = toaster.time || DEFAULT_TIME;
     }
 
     addToast(toast) {
         let color = DEFAULT_COLOR[toast.color || DEFAULT_COLOR_KEY];
         Toastify({
             text: (toast.title ? (toast.title + "\n") : "") + toast.message || "",
-            duration: toast.time || this.defaultTime,
+            duration: toast.time || this._defaultTime,
             destination: "",
             newWindow: true,
-            close: true,
+            close: false,
             gravity: "top",
             position: "right",
             stopOnFocus: true,

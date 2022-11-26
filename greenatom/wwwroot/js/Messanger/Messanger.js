@@ -1,6 +1,6 @@
 class Messenger {
     constructor() {
-
+        this.toaster = new Toaster();
     }
 
     sendPost(request) {
@@ -10,6 +10,7 @@ class Messenger {
             })
             .catch((error) => {
                 if (request.cache) request.cache(error);
+                this.toaster.addToast({message: "Не удалось подключиться.", title: "Ошибка:", color: "red"});
             });
     }
 
@@ -18,10 +19,23 @@ class Messenger {
             address: "login",
             message: {email: email, password: password},
             receive: (response) => {
-                window.redirect(response.data.URL);
+                if (response.data.URL !== window.location.href) window.location = response.data.URL;
+                else this.toaster.addToast({message: "Не верные данные", title: "Ошибка:", color: "red"});
             },
             cache: (error) => {
-                console.log("Failed connection open")
+                console.log(error)
+            }
+        });
+    }
+
+    register(email, password) {
+        this.sendPost({
+            address: "register",
+            message: {email: email, password: password},
+            receive: (response) => {
+                window.location = response.data.URL;
+            },
+            cache: (error) => {
                 console.log(error)
             }
         });
@@ -34,13 +48,8 @@ class Messenger {
                 window.redirect(response.data.URL);
             },
             cache: (error) => {
-                console.log("Failed connection open")
                 console.log(error)
             }
         });
-    }
-
-    close() {
-
     }
 }
