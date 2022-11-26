@@ -8,13 +8,6 @@ namespace greenatom.Controllers
     [Authorize]
     public class IndexControler : ControllerBase
     {
-        private readonly ILogger<IndexControler> _logger;
-
-        public IndexControler(ILogger<IndexControler> logger)
-        {
-            _logger = logger;
-        }
-
         [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         public IActionResult GetHtml()
