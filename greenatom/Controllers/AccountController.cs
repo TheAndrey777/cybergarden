@@ -1,4 +1,7 @@
 using System.Security.Claims;
+using greenatom.Models;
+using greenatom.Services;
+using greenatom.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -7,19 +10,13 @@ namespace greenatom.Controllers
 {
     [ApiController]
     [Route("/")]
-    public class LoginControler : ControllerBase
+    public class AccountController : ControllerBase
     {
-        List<User> people = new List<User>
-        {
-            new User("tom@gmail.com", "12345"),
-            new User("bob@gmail.com", "55555")
-        };
+        private readonly DatabaseService _databaseService;
 
-        private readonly ILogger<LoginControler> _logger;
-
-        public LoginControler(ILogger<LoginControler> logger)
+        public AccountController(DatabaseService dbService)
         {
-            _logger = logger;
+            _databaseService = dbService;
         }
 
         [HttpGet("login")]
@@ -29,14 +26,11 @@ namespace greenatom.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login(LoginViewModel viewModel)
         {
-            
-            User? user = people.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
-            if (user != null)
+            if (await _databaseService.CheckPassword(viewModel.Email, viewModel.Password))
             {
-                Console.WriteLine("Logging in...");
-                await Authenticate(model.Email); // аутентификация
+                await Authenticate(viewModel.Email);
                 return Redirect("/");
             }
             return Redirect("/login");
@@ -59,9 +53,25 @@ namespace greenatom.Controllers
                 ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
+
+        [HttpGet("recovery")]
+        public IActionResult Recovery()
+        {
+            return this.Content(System.IO.File.ReadAllText("wwwroot/recovery.html"), "text/html");
+        }
+
+        [HttpGet("register")]
+        public IActionResult Register()
+        {
+            return this.Content(System.IO.File.ReadAllText("wwwroot/register.html"), "text/html");
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterViewModel viewModel)
+        {
+            await _databaseService.AddUser(new UserModel(viewModel.Email, viewModel.Password));
+            await Authenticate(viewModel.Email);
+            return Redirect("/");
+        }
     }
-
-    public record class LoginModel(string Email, string Password);
-
-    public record class User(string Email, string Password);
 }
