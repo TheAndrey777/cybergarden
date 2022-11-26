@@ -2,7 +2,7 @@ using greenatom.Models;
 using greenatom.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
-namespace greenatom;
+namespace greenatom ;
 
     public class Program
     {
@@ -11,7 +11,7 @@ namespace greenatom;
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie("Cookies",options => options.LoginPath = "/login");
+                .AddCookie(options => options.LoginPath = "/login");
             builder.Services.AddAuthorization();
 
             builder.Services.AddEndpointsApiExplorer();
@@ -31,7 +31,6 @@ namespace greenatom;
 
             app.UseHttpsRedirection();
 
-            app.UseAuthentication();
             app.UseAuthorization();
             app.UseStaticFiles();
 
