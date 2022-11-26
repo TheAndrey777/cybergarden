@@ -9,11 +9,124 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
-    <PackageReference Include="MongoDB.Bson" Version="2.18.0" />
-    <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
-    <PackageReference Include="MongoDB.Driver.Core" Version="2.18.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0"/>
+    <PackageReference Include="MongoDB.Bson" Version="2.18.0"/>
+    <PackageReference Include="MongoDB.Driver" Version="2.18.0"/>
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.18.0"/>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\css\main.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\css\font-awesome.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\css\font-awesome.min.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\font-awesome.min.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\fonts\FontAwesome.otf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\HELP-US-OUT.txt"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\less\animated.less"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\less\bordered-pulled.less"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\less\core.less"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\less\fixed-width.less"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\less\font-awesome.less"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\less\icons.less"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\less\larger.less"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\less\list.less"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\less\mixins.less"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\less\path.less"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\less\rotated-flipped.less"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\less\screen-reader.less"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\less\stacked.less"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\less\variables.less"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\scss\font-awesome.scss"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\scss\_animated.scss"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\scss\_core.scss"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\scss\_fixed-width.scss"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\scss\_icons.scss"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\scss\_larger.scss"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\scss\_list.scss"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\scss\_mixins.scss"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\scss\_path.scss"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\scss\_screen-reader.scss"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\scss\_stacked.scss"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\font-awesome-4.7.0\scss\_variables.scss"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\Golos-Text_Bold.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\Golos-Text_VF.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\iconic\css\material-design-iconic-font.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\iconic\css\material-design-iconic-font.min.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\iconic\fonts\Material-Design-Iconic-Font.eot"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\iconic\fonts\Material-Design-Iconic-Font.svg"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\iconic\fonts\Material-Design-Iconic-Font.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\iconic\fonts\Material-Design-Iconic-Font.woff"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\iconic\fonts\Material-Design-Iconic-Font.woff2"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\iconic\material-design-iconic-font.min.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-Black.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-BlackItalic.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-Bold.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-BoldItalic.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-ExtraBold.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-ExtraBoldItalic.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-ExtraLight.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-ExtraLightItalic.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-Italic.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-Light.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-LightItalic.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-Medium.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-MediumItalic.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-Regular.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-SemiBold.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-SemiBoldItalic.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-Thin.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\fonts\poppins\Poppins-ThinItalic.ttf"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\images\bg-01.jpg"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\images\icons\GreenAtomIco.ico"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\index.html"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\js\main.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\logining.html"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\recovery.html"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\registration.html"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\animate\animate.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\animsition\css\animsition.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\animsition\css\animsition.min.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\animsition\js\animsition.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\animsition\js\animsition.min.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\css\bootstrap-grid.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\css\bootstrap-grid.css.map"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\css\bootstrap-grid.min.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\css\bootstrap-grid.min.css.map"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\css\bootstrap-reboot.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\css\bootstrap-reboot.css.map"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\css\bootstrap-reboot.min.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\css\bootstrap-reboot.min.css.map"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\css\bootstrap.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\css\bootstrap.css.map"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\css\bootstrap.min.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\css\bootstrap.min.css.map"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\js\bootstrap.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\js\bootstrap.min.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\js\popper.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\js\popper.min.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\bootstrap\js\tooltip.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\countdowntime\countdowntime.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\css-hamburgers\hamburgers.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\css-hamburgers\hamburgers.min.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\daterangepicker\daterangepicker.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\daterangepicker\daterangepicker.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\daterangepicker\moment.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\daterangepicker\moment.min.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\jquery\jquery-3.2.1.min.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\perfect-scrollbar\perfect-scrollbar.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\perfect-scrollbar\perfect-scrollbar.min.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\select2\select2.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\select2\select2.js"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\select2\select2.min.css"/>
+    <_ContentIncludedByDefault Remove="wwwroot\Registration\vendor\select2\select2.min.js"/>
   </ItemGroup>
 
 </Project>
