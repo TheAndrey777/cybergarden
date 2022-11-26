@@ -21,17 +21,16 @@
                     <span class="login100-form-title">
                         Создание опросa
                     </span>
-                    <div>
-                        <input class="input300" style="padding-left: 5px;" ; type="text" name="username" placeholder="Текст вопроса">
-                        <p style=""><input type="checkbox" name="a" value="1"><input class="input300" style="padding-top: 25px; padding-left: 5px;border-bottom: solid; border-bottom-color:#808080" ; type="text" name="username" placeholder="Вариант ответа">
-
+                    <div id="div">
+                        <input class="input300" style="padding-left: 5px;" ; id="answerBox" type="text" name="username" placeholder="Текст вопроса">
+                        <p style=""><input type="checkbox" name="a" value="1"><input class="input300" style="padding-top: 25px; padding-left: 5px;border-bottom: solid; border-bottom-color:#808080" ; id="answer" type="text" name="username" placeholder="Вариант ответа">
                     </div>
 
 
                    <div class="container-login100-form-btn" style="float: left; width: 25%; height: 8maxv; ">
                         <div class="wrap-login100-form-btn" style="float: center">
                             <div class="login100-form-bgbtn" style="float: center"></div>
-                            <button class="login100-form-btn" style="float: center; width: 25%; height: 8maxv; text-align: center;" type="button">
+                            <button class="login100-form-btn" style="float: center; width: 25%; height: 8maxv; text-align: center;" id="buttonAdd" type="button">
                                               +
                             </button>
                         </div>
@@ -40,12 +39,20 @@
                     <div class="container-login100-form-btn" style="float: right; text-align: center; width: 25%; height: 8maxv;">
                         <div class="wrap-login100-form-btn" style="float: center; text-align: center;">
                             <div class="login100-form-bgbtn" style="float: center; text-align: center;"></div>
-                            <button class="login100-form-btn" style="float: center; width: 25%; height: 100maxv; text-align: right;" type="button">              -</button>
+                            <button class="login100-form-btn" style="float: center; width: 25%; height: 100maxv; text-align: right;" id="buttonRemove" type="button">
+                                              -
+                            </button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script src="js/Libs/axios/axios.min.js"></script>
+    <script src="js/Libs/ToastLib.js"></script>
+    <script src="js/Wrappers/Toaster/Toaster.js"></script>
+    <script src="js/Messanger/Messanger.js"></script>
+    <script src="js/Wrappers/Walidator/Walidator.js"></script>
+    <script src="js/Pages/AdminPanel/adminPanel.js"></script>
 </body>
 </html>
