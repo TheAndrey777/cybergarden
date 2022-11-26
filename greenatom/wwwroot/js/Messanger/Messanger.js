@@ -19,7 +19,7 @@ class Messenger {
             address: "login",
             message: {email: email, password: password},
             receive: (response) => {
-                if (response.data.URL !== window.location.href) window.location = response.data.URL;
+                if (!window.location.href.includes(response.data.URL)) window.location = response.data.URL;
                 else this.toaster.addToast({message: "Не верные данные", title: "Ошибка:", color: "red"});
             },
             cache: (error) => {

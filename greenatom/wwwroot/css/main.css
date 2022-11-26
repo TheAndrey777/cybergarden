@@ -313,7 +313,7 @@ iframe {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: ;
+  margin-bottom: 20px;
   justify-content: center;
 }
 
