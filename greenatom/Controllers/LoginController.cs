@@ -25,7 +25,7 @@ namespace greenatom.Controllers
         [HttpGet("login")]
         public IActionResult Login()
         {
-            return this.Content(System.IO.File.ReadAllText("wwwroot/login.html"), "text/html");
+            return this.Content(System.IO.File.ReadAllText($"wwwroot/{(User.Identity.IsAuthenticated?"index.html": "login.html")}"), "text/html");
         }
 
         [HttpPost("login")]
@@ -46,7 +46,8 @@ namespace greenatom.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Redirect("/login");
+            Console.WriteLine("Logged out");
+            return Redirect("/");
         }
 
         private async Task Authenticate(string userName)
@@ -55,8 +56,7 @@ namespace greenatom.Controllers
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
             };
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
-                ClaimsIdentity.DefaultRoleClaimType);
+            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie");
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
     }
