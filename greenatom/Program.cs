@@ -1,6 +1,8 @@
 using greenatom.Models;
 using greenatom.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 
 namespace greenatom ;
 
@@ -10,34 +12,17 @@ namespace greenatom ;
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => options.LoginPath = "/login")
-//                 .AddOAuth("google", options =>
-//                 {
-//                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-//                     options.ClientId = "703398525491-4sec9hr5anl562tgad451ejsj9vi30ej.apps.googleusercontent.com";
-//                     options.ClientSecret = "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";
-//                     options.SaveTokens = false;
-//                     options.AuthorizationEndpoint = "https://accounts.google.com/o/oauth2/auth";
-//                     options.TokenEndpoint = "https://oauth2.googleapis.com/token";
-//                     options.CallbackPath = "/redirect";
-//                     options.Scope.Add("https://www.googleapis.com/auth/userinfo.email");
-//                     //options.UserInformationEndpoint = "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token";
-//                     /*options.Events.OnCreatingTicket = async context =>
-//                      {
-//
-//                      };*/
-//                 })
-                .AddGoogle(options =>
+            builder.Services.AddAuthentication(
+                o => { o.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme; })
+                .AddCookie(c => c.LoginPath = "/login")
+                .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
                 {
-                    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.ClientId = "703398525491-4sec9hr5anl562tgad451ejsj9vi30ej.apps.googleusercontent.com";
-                    options.ClientSecret = "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";
-                    options.SaveTokens = false;
-                    options.CallbackPath = "/redirect";
-                    options.Scope.Add("https://www.googleapis.com/auth/userinfo.email");
-                })
-                ;
+                    options.ClientId = @"140171481243-8sbr1e1lctf5ir09luflhja1j59u5qpt.apps.googleusercontent.com";
+                    options.ClientSecret = @"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";
+                    options.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
+                    options.Scope.Add("email");
+                });
+
 
             builder.Services.AddAuthorization();
 

@@ -6,7 +6,7 @@ namespace greenatom.Controllers
     [ApiController]
     [Route("/")]
     [Authorize]
-    public class IndexControler : ControllerBase
+    public class IndexController : ControllerBase
     {
         [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]

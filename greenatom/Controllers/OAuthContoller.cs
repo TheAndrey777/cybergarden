@@ -1,15 +1,13 @@
-﻿using System.Security.Claims;
-using greenatom.Models;
-using greenatom.Services;
-using greenatom.ViewModels;
+﻿using greenatom.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Mvc;
 
 namespace greenatom.Controllers
 {
     [ApiController]
-    [Route("/oauth")]
+    [Route("/")]
     public class OAuthController : ControllerBase
     {
         private readonly DatabaseService _databaseService;
@@ -19,10 +17,31 @@ namespace greenatom.Controllers
             _databaseService = dbService;
         }
 
-        [HttpGet("google")]
+        [HttpGet("/oauth/google")]
         public async Task GoogleOAuth()
         {
-            await HttpContext.ChallengeAsync("google");
+            await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme, new AuthenticationProperties()
+            {
+                RedirectUri = Url.Action("GoogleResponse")
+            });
+        }
+
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public async Task<IActionResult> GoogleResponse()
+        {
+            Console.WriteLine($"Callback");
+            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var claims = result.Principal?.Identities.FirstOrDefault()?
+                .Claims.Select(claim => new
+                {
+                    claim.Issuer,
+                    claim.OriginalIssuer,
+                    claim.Type,
+                    claim.Value
+                });
+            Console.WriteLine($"Logged In: {result}");
+            return new JsonResult(claims);
         }
     }
 }
