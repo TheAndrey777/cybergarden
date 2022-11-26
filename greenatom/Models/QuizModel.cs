@@ -14,6 +14,9 @@ public class QuizModel
 
     [BsonElement("problems")]
     public List<Problem> Problems { get; set; }
+
+    [BsonElement("answers")]
+    public List<List<string>> correctAnswers { get; set; }
 }
 
 public class Problem

@@ -16,56 +16,65 @@
 <body>
 
     <div class="limiter">
-        <div class="container-login100" style="background-image: url('images/bg-01.jpg'); padding-bottom: 35px;">
+        <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
             <div class="wrap-login200">
                 <form class="login100-form">
                     <span class="login100-form-title">
-                        Создание Квиза
+                        Создание опросa
                     </span>
 
-                    <div class="wrap-input100 validate-input" data-validate = "Username is reauired">
-                        <input class="input100" id="questionBox" type="text" name="username" placeholder="Текст вопроса">
+                    <div class="wrap-input100 validate-input" data-validate="Username is reauired">
+                        <input class="input100" type="text" name="username" placeholder="Текст вопроса">
                     </div>
 
-                    <div class="wrap-input100 validate-input" id="div" data-validate = "Username is reauired" style="display: inline-flex;">
-                        <input type="checkbox" id="checkbox" name="a" value="1">
-                        <input class="input100" type="text" id="answer" name="username" placeholder="Вариант ответа" >
+                    <div class="wrap-input100 validate-input" data-validate="Username is reauired" style="display: inline-flex;">
+                        <input type="checkbox" name="a" value="1">
+                        <input class="input100" type="text" name="username" placeholder="Вариант ответа">
 
                     </div>
-                    <div id="buttonDiv" style="padding-bottom: 100px;">
-                   <div class="container-login100-form-btn" style="float: left; width: 25%; height: 50px; ">
-                        <div class="wrap-login100-form-btn" style="float: center">
-                            <div class="login100-form-bgbtn" style="float: center"></div>
-                            <button class="login100-form-btn" id="buttonAdd" style="float: center; width: 25%; height: 50px; text-align: center;" type="button">
-                                              +
+                    <div style="padding-bottom: 100px;">
+                        <div class="container-login100-form-btn" style="float: left; width: 25%; height: 50px; ">
+                            <div class="wrap-login100-form-btn" style="float: center">
+                                <div class="login100-form-bgbtn" style="float: center"></div>
+                                <button class="login100-form-btn" style="float: center; width: 25%; height: 50px; text-align: center;" type="button">
+                                    +
+                                </button>
+                            </div>
+                        </div>
+                        <div class="container-login100-form-btn" style="float: right; text-align: center; width: 25%; height: 50px;">
+                            <div class="wrap-login100-form-btn" style="float: center; text-align: center;">
+                                <div class="login100-form-bgbtn" style="float: center; text-align: center;"></div>
+                                <button class="login100-form-btn" style="float: center; width: 25%; height: 50px; text-align: right;" type="button">              -</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn" id="connectButton" type="button">
+                                Новый вопрос
                             </button>
                         </div>
                     </div>
-                    <div class="container-login100-form-btn" id="buttonRemove" style="float: right; text-align: center; width: 25%; height: 50px;">
-                        <div class="wrap-login100-form-btn" style="float: center; text-align: center;">
-                            <div class="login100-form-bgbtn" style="float: center; text-align: center;"></div>
-                            <button class="login100-form-btn" style="float: center; width: 25%; height: 50px; text-align: right;" type="button">              -</button>
+
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn" id="connectButton" type="button">
+                                Удалить вопрос
+                            </button>
                         </div>
                     </div>
-                </div>
 
-                        <div class="container-login100-form-btn">
-                            <div class="wrap-login100-form-btn">
-                                <div class="login100-form-bgbtn"></div>
-                                <button class="login100-form-btn" id="createButton" type="button">
-                                    Новый вопрос
-                                </button>
-                            </div>
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn" id="connectButton" type="button">
+                                Опубликовать квиз
+                            </button>
                         </div>
-
-                        <div class="container-login100-form-btn">
-                            <div class="wrap-login100-form-btn">
-                                <div class="login100-form-bgbtn"></div>
-                                <button class="login100-form-btn" id="publicButton" type="button">
-                                    Опубликовать квиз
-                                </button>
-                            </div>
-                        </div>
+                    </div>
 
 
 
@@ -73,10 +82,7 @@
             </div>
         </div>
     </div>
-    <script src="js/Libs/axios/axios.min.js"></script>
-    <script src="js/Libs/ToastLib.js"></script>
-    <script src="js/Wrappers/Toaster/Toaster.js"></script>
-    <script src="js/Messanger/Messanger.js"></script>
-    <script src="js/Pages/AdminPanel/adminPanel.js"></script>
+
+
 </body>
 </html>

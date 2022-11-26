@@ -1,7 +1,7 @@
-﻿using AspNet.Security.OAuth.Vkontakte;
+﻿using AspNet.Security.OAuth.Discord;
+using AspNet.Security.OAuth.Vkontakte;
 using greenatom.Services;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,26 +23,25 @@ namespace greenatom.Controllers
         {
             await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme, new AuthenticationProperties()
             {
-                RedirectUri = Url.Action("GoogleResponse")
+                RedirectUri = "/google-response",
             });
         }
 
-        [ApiExplorerSettings(IgnoreApi = true)]
+        [HttpGet("google-response")]
         public async Task<IActionResult> GoogleResponse()
         {
-            Console.WriteLine($"Callback");
-            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            Console.WriteLine();
+            Console.WriteLine($"Google:");
+            var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
 
-            var claims = result.Principal?.Identities.FirstOrDefault()?
-                .Claims.Select(claim => new
-                {
-                    claim.Issuer,
-                    claim.OriginalIssuer,
-                    claim.Type,
-                    claim.Value
-                });
-            Console.WriteLine($"Logged In: {result}");
-            return new JsonResult(claims);
+            foreach (var pair in result.Ticket.Properties.Items)
+            {
+                Console.WriteLine($"{pair.Key}: {pair.Value}");
+            }
+
+            if (result.Succeeded)
+                return Redirect("/");
+            return Redirect("/login");
         }
 
         [HttpGet("/oauth/vk")]
@@ -51,26 +50,52 @@ namespace greenatom.Controllers
             await HttpContext.ChallengeAsync(VkontakteAuthenticationDefaults.AuthenticationScheme,
                 new AuthenticationProperties()
                 {
-                    RedirectUri = Url.Action("VkontakteResponse")
+                    RedirectUri = "/vk-response"
                 });
         }
 
-        [ApiExplorerSettings(IgnoreApi = true)]
+        [HttpGet("vk-response")]
         public async Task<IActionResult> VkontakteResponse()
         {
-            Console.WriteLine($"Callback");
-            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            Console.WriteLine();
+            Console.WriteLine($"VK:");
+            var result = await HttpContext.AuthenticateAsync(VkontakteAuthenticationDefaults.AuthenticationScheme);
 
-            var claims = result.Principal?.Identities.FirstOrDefault()?
-                .Claims.Select(claim => new
+            foreach (var pair in result.Ticket.Properties.Items)
+            {
+                Console.WriteLine($"{pair.Key}: {pair.Value}");
+            }
+
+            if (result.Succeeded)
+                return Redirect("/");
+            return Redirect("/login");
+        }
+
+        [HttpGet("/oauth/discord")]
+        public async Task DiscordOAuth()
+        {
+            await HttpContext.ChallengeAsync(DiscordAuthenticationDefaults.AuthenticationScheme,
+                new AuthenticationProperties()
                 {
-                    claim.Issuer,
-                    claim.OriginalIssuer,
-                    claim.Type,
-                    claim.Value
+                    RedirectUri = "/discord-response"
                 });
-            Console.WriteLine($"Logged In: {result}");
-            return new JsonResult(claims);
+        }
+
+        [HttpGet("discord-response")]
+        public async Task<IActionResult> DiscordResponse()
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Discord:");
+            var result = await HttpContext.AuthenticateAsync(DiscordAuthenticationDefaults.AuthenticationScheme);
+
+            foreach (var pair in result.Ticket.Properties.Items)
+            {
+                Console.WriteLine($"{pair.Key}: {pair.Value}");
+            }
+
+            if (result.Succeeded)
+                return Redirect("/");
+            return Redirect("/login");
         }
     }
 }
