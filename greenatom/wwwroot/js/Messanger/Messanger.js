@@ -45,7 +45,7 @@ class Messenger {
         this.sendPost({
             address: "logout",
             receive: (response) => {
-                window.redirect(response.data.URL);
+                window.location = response.data.URL;
             },
             cache: (error) => {
                 console.log(error)
