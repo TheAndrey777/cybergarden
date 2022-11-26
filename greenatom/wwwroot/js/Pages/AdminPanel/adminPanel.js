@@ -1,31 +1,54 @@
-let questionBox = document.getElementById("answerBox");
-let questions = [{questionBox: document.getElementById("answer")}];
+let questID = 0;
+let quests = [{
+        questionBox: document.getElementById("questionBox"),
+        div: document.getElementById("div"),
+        answers: [{
+            answer: document.getElementById("answer"),
+            div: document.getElementById("div"),
+            checkBox: document.getElementById("checkbox")
+        }],
+    }
+];
+let createButton = document.getElementById("createButton");
+createButton.addEventListener("click", () => {
+    let quest = {};
+    quest.div = document.createElement('div');
+    quest.div.className = "wrap-input100 validate-input";
+    document.getElementById("buttonDiv").before(quest.div);
+    quest.questionBox = document.createElement('input');
+    quest.div.append(quest.questionBox);
+    quests.push(quest);
+    questID++;
+});
 let buttons = [
     document.getElementById("buttonAdd"),
     document.getElementById("buttonRemove")
 ];
-let div = document.getElementById("div");
-let id = 1;
 let clicks = [
-    (div) => {
-        let p = document.createElement('p');
-        div.append(p);
+    (question) => {
+        let div = document.createElement('div');
+        div.className = "wrap-input100 validate-input";
         let checkBox = document.createElement('input');
         checkBox.type = "checkbox";
-        div.append(checkBox);
         let input = document.createElement('input');
-        input.class = "input300";
-        input.placeholder="Вариант ответа";
-        input.style = "padding-top: 25px; padding-left: 5px;border-bottom: solid; border-bottom-color:#808080";
+        input.className = "input100";
+        input.placeholder = "Вариант ответа";
+        question.div.after(div);
+        question.answers.push({
+            answer: input,
+            div: div,
+            checkBox: checkBox
+        });
+        div.append(checkBox);
         div.append(input);
-        questions.push({p: p, checkBox: checkBox, input: input});
-        id++;
     },
-    (div) => {
-        if (id < 0) return;
-        for (let key in questions[id]) questions[id][key].remove();
-        questions.splice(id, 1);
-        id--;
+    (question) => {
+        if (question.answers.length === 1) return;
+        question.answers[question.answers.length - 1].div.remove();
+        //for (let key in question.answers[question.answers.length - 1]) question.answers[question.answers.length - 1][key].remove();
+        question.answers.splice(question.answers.length - 1, 1);
     }
 ];
-for (let i = 0; i < buttons.length; i++) buttons[i].addEventListener("click", () => clicks[i](div));
+
+for (let i = 0; i < buttons.length; i++)
+    buttons[i].addEventListener("click", () => clicks[i](quests[questID]));
