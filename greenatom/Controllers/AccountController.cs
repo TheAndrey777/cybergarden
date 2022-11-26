@@ -19,6 +19,7 @@ namespace greenatom.Controllers
             _databaseService = dbService;
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet("login")]
         public IActionResult Login()
         {
@@ -54,12 +55,14 @@ namespace greenatom.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet("recovery")]
         public IActionResult Recovery()
         {
             return this.Content(System.IO.File.ReadAllText("wwwroot/recovery.html"), "text/html");
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet("register")]
         public IActionResult Register()
         {
