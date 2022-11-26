@@ -1,6 +1,6 @@
+using AspNet.Security.OAuth.Vkontakte;
 using greenatom.Models;
 using greenatom.Services;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 
@@ -19,8 +19,13 @@ namespace greenatom ;
                 {
                     options.ClientId = @"140171481243-8sbr1e1lctf5ir09luflhja1j59u5qpt.apps.googleusercontent.com";
                     options.ClientSecret = @"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";
-                    options.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
                     options.Scope.Add("email");
+                })
+                .AddVkontakte(VkontakteAuthenticationDefaults.AuthenticationScheme, config =>
+                {
+                    config.ClientId = "51487231";
+                    config.ClientSecret = "KrlM6g70JYVqiCcbiGRo";
+                    config.Scope.Add("email");
                 });
 
 
