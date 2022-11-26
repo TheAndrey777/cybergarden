@@ -69,6 +69,7 @@ namespace greenatom.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterViewModel viewModel)
         {
+            if (await _databaseService.FindUser(viewModel.Email)) return Ok();
             await _databaseService.AddUser(new UserModel(viewModel.Email, viewModel.Password));
             await Authenticate(viewModel.Email);
             return Redirect("/");

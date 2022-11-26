@@ -18,7 +18,7 @@ namespace greenatom.Controllers
         [HttpGet]
         public IActionResult GetHtml()
         {
-            return Content(System.IO.File.ReadAllText("wwwroot/index.html"), "text/html");
+            return Content(System.IO.File.ReadAllText("wwwroot/form.html"), "text/html");
         }
     }
 }
