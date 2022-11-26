@@ -1,4 +1,5 @@
 ﻿using greenatom.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -38,11 +39,21 @@ namespace greenatom.Services ;
 
         public async Task<QuizModel> GetQuiz(string name)
         {
-            return await _pollsCollection.Find(poll => poll.Name == name).FirstOrDefaultAsync();
+            var data = await _pollsCollection.Find(poll => poll.Name == name).FirstOrDefaultAsync();
+            if (data is not null)
+                data.correctAnswers = null;
+
+            return data;
         }
         
         public async Task AddQuiz(QuizModel quiz)
         {
             await _pollsCollection.InsertOneAsync(quiz);
+        }
+
+        public async Task<List<List<string>>> GetAnswers(string name)
+        {
+            var data = await _pollsCollection.Find(poll => poll.Name == name).FirstOrDefaultAsync();
+            return data.correctAnswers;
         }
     }
