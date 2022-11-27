@@ -93,9 +93,9 @@ namespace greenatom.Controllers ;
 
         [HttpPost("/quiz/getready")]
         [Authorize]
-        public async Task<TaskReadyViewModel> SetReady([FromBody] string taskName)
+        public async Task<TaskReadyViewModel> GetReady([FromBody] TaskNameViewModel taskName)
         {
-            var fal = new TaskReadyViewModel() { Ready = false, TaskName = taskName, Wins = 0 };
+            var fal = new TaskReadyViewModel() { Ready = false, TaskName = taskName.Name, Wins = 0 };
             var dbU = await _databaseService.FindUser(User.Identity.Name);
             if (dbU == null)
             {
@@ -108,10 +108,10 @@ namespace greenatom.Controllers ;
                 await _databaseService.Updateuser(dbU);
             }
 
-            var has = dbU.ReadyTask.Any(t => t.Name == taskName);
+            var has = dbU.ReadyTask.Any(t => t.Name == taskName.Name);
             if (has == false)
                 return fal;
-            var find = dbU.ReadyTask.Find(t => t.Name == taskName);
-            return new TaskReadyViewModel() { Ready = true, TaskName = taskName, Wins = find.Wins };
+            var find = dbU.ReadyTask.Find(t => t.Name == taskName.Name);
+            return new TaskReadyViewModel() { Ready = true, TaskName = taskName.Name, Wins = find.Wins };
         }
     }
