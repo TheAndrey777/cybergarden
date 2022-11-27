@@ -22,5 +22,6 @@ namespace greenatom.Models ;
         {
             Username = username;
             Password = password;
+            Form = new FormDataModel();
         }
     }

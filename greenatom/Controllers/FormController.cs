@@ -36,7 +36,7 @@ namespace greenatom.Controllers
             formDataModel.MajorCommercialProjects = formData.MajorCommercialProjects;
             formDataModel.IsSet = true;
             dbUser.Form = formDataModel;
-            await _databaseService.AddUser(dbUser);
+            await _databaseService.Updateuser(dbUser);
             Console.WriteLine($"Data: {formData}");
             return Redirect("/");
         }

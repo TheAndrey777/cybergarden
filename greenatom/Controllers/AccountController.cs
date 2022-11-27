@@ -74,7 +74,10 @@ namespace greenatom.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterViewModel viewModel)
         {
             if (await _databaseService.UserExist(viewModel.Email)) return Ok();
-            await _databaseService.AddUser(new UserModel(viewModel.Email, viewModel.Password));
+            Console.WriteLine("User does not exist");
+            var u = new UserModel(viewModel.Email, viewModel.Password);
+            Console.WriteLine($"{u.Username} {u.Password}");
+            await _databaseService.AddUser(u);
             await Authenticate(viewModel.Email);
             return Redirect("/");
         }

@@ -19,6 +19,11 @@ namespace greenatom.Services ;
 
         public async Task AddUser(UserModel user)
         {
+            await _usersCollection.InsertOneAsync(user);
+        }
+
+        public async Task Updateuser(UserModel user)
+        {
             await _usersCollection.ReplaceOneAsync(u => u.Id == user.Id, user, new ReplaceOptions { IsUpsert = true });
         }
 
