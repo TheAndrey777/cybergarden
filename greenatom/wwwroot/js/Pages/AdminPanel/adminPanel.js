@@ -1,13 +1,15 @@
+let messenger = new Messenger();
+let toaster = new Toaster();
 let questID = 0;
 let quests = [{
-        questionBox: document.getElementById("questionBox"),
+    questionBox: document.getElementById("questionBox"),
+    div: document.getElementById("div"),
+    answers: [{
+        answer: document.getElementById("answer"),
         div: document.getElementById("div"),
-        answers: [{
-            answer: document.getElementById("answer"),
-            div: document.getElementById("div"),
-            checkBox: document.getElementById("checkbox")
-        }],
-    }
+        checkBox: document.getElementById("checkbox")
+    }],
+}
 ];
 let createButton = document.getElementById("createButton");
 createButton.addEventListener("click", () => {
@@ -26,10 +28,13 @@ createButton.addEventListener("click", () => {
     }];
     quests.push(quest);
     clicks[0](quest);
+    quest.answers = [
+        quest.answers[1]
+    ];
     questID++;
 });
 let removeButton = document.getElementById("removeButton");
-removeButton.addEventListener("click",  () => {
+removeButton.addEventListener("click", () => {
     let quest = quests[questID];
     quest.div.remove();
     quest.answers.forEach(answer => answer.div.remove());
@@ -63,6 +68,24 @@ let clicks = [
         question.answers.splice(question.answers.length - 1, 1);
     }
 ];
-
 for (let i = 0; i < buttons.length; i++)
     buttons[i].addEventListener("click", () => clicks[i](quests[questID]));
+
+document.getElementById("publicButton").addEventListener("click", () => {
+    let questions = [], correctAnswers = [];
+    quests.forEach((quest) => {
+        let answers = [], questCorrectAnswers = [];
+        quest.answers.forEach(answer => {
+            answers.push(answer.answer.value);
+            if (answer.checkBox.checked) correctAnswers.push(answer.answer.value);
+        });
+        questions.push({answers: answers, question: quest.questionBox.value});
+        correctAnswers.push(questCorrectAnswers);
+    });
+    messenger.sendPost({address: "quiz/add", message: {name: "TestQuest", problems: questions, correctAnswers: correctAnswers},
+        receive: (response) => {
+            console.log(response.data)
+            toaster.addToast({message: "Квиз успешно создан", title: "Успешно:", color: "green"});
+        },
+    });
+});
