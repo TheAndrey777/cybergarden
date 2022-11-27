@@ -1,3 +1,4 @@
+using greenatom.Models;
 using greenatom.Services;
 using greenatom.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -27,9 +28,8 @@ namespace greenatom.Controllers
         public async Task<IActionResult> PostForm([FromBody] FormViewModel formData)
         {
             Console.WriteLine($"Data: {formData}");
-            return Redirect("/");
             var dbUser = await _databaseService.FindUser(User.Identity.Name);
-            var formDataModel = dbUser.Form;
+            var formDataModel = dbUser.Form ?? new FormDataModel();
             formDataModel.FullName = formData.FullName;
             formDataModel.Occupation = formData.Occupation;
             formDataModel.DateBirth = formData.DateBirth;

@@ -1,13 +1,12 @@
 namespace greenatom.ViewModels ;
 
-    [Serializable]
-    public record FormViewModel
+    public record class FormViewModel
     {
-        public string FullName;
-        public DateTime DateBirth;
-        public Occupation Occupation;
-        public FamiliarWithProgramming FamiliarWithProgramming;
-        public MajorCommercialProjects MajorCommercialProjects;
+        public string FullName { get; set; }
+        public DateTime DateBirth { get; set; }
+        public Occupation Occupation { get; set; }
+        public FamiliarWithProgramming FamiliarWithProgramming { get; set; }
+        public MajorCommercialProjects MajorCommercialProjects { get; set; }
 
         public override string ToString()
         {
