@@ -77,11 +77,12 @@ document.getElementById("publicButton").addEventListener("click", () => {
         let answers = [], questCorrectAnswers = [];
         quest.answers.forEach(answer => {
             answers.push(answer.answer.value);
-            if (answer.checkBox.checked) correctAnswers.push(answer.answer.value);
+            if (answer.checkBox.checked) questCorrectAnswers.push(answer.answer.value);
         });
         questions.push({answers: answers, question: quest.questionBox.value});
         correctAnswers.push(questCorrectAnswers);
     });
+    console.log({name: "TestQuest", problems: questions, correctAnswers: correctAnswers})
     messenger.sendPost({address: "quiz/add", message: {name: "TestQuest", problems: questions, correctAnswers: correctAnswers},
         receive: (response) => {
             console.log(response.data)
