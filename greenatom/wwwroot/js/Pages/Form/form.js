@@ -13,7 +13,6 @@ document.getElementById("sendButton").addEventListener("click", () => {
             if (!document.getElementById(key + i).checked) continue;
             form[key] = i;
         }
-        document.getElementById("name").value = form;
     });
     messenger.sendPost({address: "form", message: form,
         receive: () => {
