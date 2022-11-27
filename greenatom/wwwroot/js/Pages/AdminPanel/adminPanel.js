@@ -9,7 +9,6 @@ let quests = [{
         }],
     }
 ];
-
 let createButton = document.getElementById("createButton");
 createButton.addEventListener("click", () => {
     let quest = {};
@@ -61,7 +60,6 @@ let clicks = [
     (question) => {
         if (question.answers.length === 1) return;
         question.answers[question.answers.length - 1].div.remove();
-        //for (let key in question.answers[question.answers.length - 1]) question.answers[question.answers.length - 1][key].remove();
         question.answers.splice(question.answers.length - 1, 1);
     }
 ];
