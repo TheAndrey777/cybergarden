@@ -11,6 +11,7 @@ let quests = [{
     }],
 }
 ];
+let title = document.getElementById("title");
 let createButton = document.getElementById("createButton");
 createButton.addEventListener("click", () => {
     let quest = {};
@@ -83,7 +84,7 @@ document.getElementById("publicButton").addEventListener("click", () => {
         correctAnswers.push(questCorrectAnswers);
     });
     console.log({name: "TestQuest", problems: questions, correctAnswers: correctAnswers})
-    messenger.sendPost({address: "quiz/add", message: {name: "TestQuest", problems: questions, correctAnswers: correctAnswers},
+    messenger.sendPost({address: "quiz/add", message: {name: title.value, problems: questions, correctAnswers: correctAnswers},
         receive: (response) => {
             console.log(response.data)
             toaster.addToast({message: "Квиз успешно создан", title: "Успешно:", color: "green"});
