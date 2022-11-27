@@ -123,5 +123,14 @@ namespace greenatom.Controllers
             UserModel? dbU = await _databaseService.FindUser(User.Identity!.Name!);
             return new RolesViewModel() { Roles = dbU.Roles };
         }
+
+        [HttpGet("user")]
+        [Authorize]
+        public async Task<UserModel> GetUser()
+        {
+            UserModel? dbU = await _databaseService.FindUser(User.Identity!.Name!);
+            dbU.Password = null;
+            return dbU;
+        }
     }
 }
