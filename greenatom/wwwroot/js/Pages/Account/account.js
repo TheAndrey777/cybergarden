@@ -15,9 +15,9 @@ messenger.get({address: "quiz/gettests", message: "",
         for (let i = 0; i < 6; i++)
             titles[i].textContent = tests[i];
         for (let i = 0; i < 6; i++) {
-            messenger.sendPost({
+            messenger.sendPostJson({
                 address: "quiz/getready",
-                message:  {name: tests[i]},
+                message: {name: tests[i]},
                 receive: (response) => {
                     states[i].style.color = response.data.ready ? "#7AC234" : "#e40000";
                     states[i].textContent = response.data.ready ? "Пройден" : "Не пройден";

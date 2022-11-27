@@ -35,7 +35,6 @@ namespace greenatom.Controllers
             if (await _databaseService.CheckPassword(viewModel.Email, viewModel.Password))
             {
                 await Authenticate(viewModel.Email);
-                Console.WriteLine("Redirection");
                 return Redirect("/");
             }
             return Redirect("/login");
@@ -122,6 +121,15 @@ namespace greenatom.Controllers
         {
             UserModel? dbU = await _databaseService.FindUser(User.Identity!.Name!);
             return new RolesViewModel() { Roles = dbU.Roles };
+        }
+
+        [HttpGet("user")]
+        [Authorize]
+        public async Task<UserModel> GetUser()
+        {
+            UserModel? dbU = await _databaseService.FindUser(User.Identity!.Name!);
+            dbU.Password = null;
+            return dbU;
         }
     }
 }
