@@ -171,9 +171,6 @@ iframe {
 
 
 .container-login200-form-btn{
-  vertical-align: bottom;
-  bottom:10px; 
-  width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
