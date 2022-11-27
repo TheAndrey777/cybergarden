@@ -35,7 +35,6 @@ namespace greenatom.Controllers
             if (await _databaseService.CheckPassword(viewModel.Email, viewModel.Password))
             {
                 await Authenticate(viewModel.Email);
-                Console.WriteLine("Redirection");
                 return Redirect("/");
             }
             return Redirect("/login");

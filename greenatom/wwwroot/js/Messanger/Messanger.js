@@ -4,7 +4,18 @@ class Messenger {
     }
 
     sendPost(request) {
-        axios.post('/' + request.address, request.message, {responseType: 'document/json'})
+        axios.post('/' + request.address, request.message, {responseType: 'document'})
+            .then((response) => {
+                if (request.receive) request.receive(response);
+            })
+            .catch((error) => {
+                if (request.cache) request.cache(error);
+                this.toaster.addToast({message: "Не удалось подключиться.", title: "Ошибка:", color: "red"});
+            });
+    }
+
+    sendPostJson(request) {
+        axios.post('/' + request.address, request.message, {responseType: 'json'})
             .then((response) => {
                 if (request.receive) request.receive(response);
             })

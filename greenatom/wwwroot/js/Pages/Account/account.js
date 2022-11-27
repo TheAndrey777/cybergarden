@@ -12,9 +12,9 @@ messenger.get({address: "quiz/gettests", message: "",
         for (let i = 0; i < 6; i++)
             titles[i].textContent = tests[i];
         for (let i = 0; i < 6; i++) {
-            messenger.sendPost({
+            messenger.sendPostJson({
                 address: "quiz/getready",
-                message:  {name: tests[i]},
+                message: {name: tests[i]},
                 receive: (response) => {
                     console.log(tests[i], response.data)
                     console.log(response)
