@@ -65,6 +65,18 @@ button:hover {
   padding: 0 7px 0 43px;
 }
 
+.label-input300 {
+  font-family: Golos-Text_VF;
+  font-size: 16px;
+  color: #333333;
+  line-height: 1.2;
+
+  display: block;
+  width: 100%;
+  background: transparent;
+  padding: 0 7px 0 43px;
+}
+
 .input200 {
   font-family: Golos-Text_VF;
   font-size: 16px;
