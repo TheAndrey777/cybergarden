@@ -16,7 +16,7 @@ messenger.get({address: "quiz/gettests", message: "",
                 address: "quiz/getready",
                 message:  {name: tests[i]},
                 receive: (response) => {
-                    console.log(tests[i], response.data)    
+                    console.log(tests[i], response.data)
                     console.log(response)
                 },
                 cache: (error) => {

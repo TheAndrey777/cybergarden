@@ -4,7 +4,7 @@ class Messenger {
     }
 
     sendPost(request) {
-        axios.post('/' + request.address, request.message, {responseType: 'document'})
+        axios.post('/' + request.address, request.message, {responseType: 'document/json'})
             .then((response) => {
                 if (request.receive) request.receive(response);
             })
@@ -15,7 +15,7 @@ class Messenger {
     }
 
     get(request) {
-        axios.get('/' + request.address, request.message)
+        axios.get('/' + request.address, request.message || "")
             .then((response) => {
                 if (request.receive) request.receive(response);
             })
