@@ -28,11 +28,12 @@ namespace greenatom.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginViewModel viewModel)
+        public async Task<IActionResult> Login([FromBody] LoginViewModel viewModel)
         {
             if (await _databaseService.CheckPassword(viewModel.Email, viewModel.Password))
             {
                 await Authenticate(viewModel.Email);
+                Console.WriteLine("Redirection");
                 return Redirect("/");
             }
             return Redirect("/login");
@@ -86,7 +87,14 @@ namespace greenatom.Controllers
         [Authorize]
         public async Task<IActionResult> AccountHtml()
         {
-            var dbU = await _databaseService.FindUser(User.Identity!.Name!);
+            UserModel? dbU = await _databaseService.FindUser(User.Identity!.Name!);
+            if (dbU == null)
+                return Redirect("logout");
+            if (dbU.Form == null)
+            {
+                dbU.Form = new FormDataModel() { IsSet = false };
+                await _databaseService.Updateuser(dbU);
+            }
             if (dbU.Form.IsSet == false)
                 return Redirect("form");
             return Content(System.IO.File.ReadAllText("wwwroot/account.html"), "text/html");

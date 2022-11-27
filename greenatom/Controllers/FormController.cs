@@ -24,9 +24,10 @@ namespace greenatom.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> PostForm([FromBody] FormViewModel formData)
         {
+            Console.WriteLine($"Data: {formData}");
+            return Redirect("/");
             var dbUser = await _databaseService.FindUser(User.Identity.Name);
             var formDataModel = dbUser.Form;
             formDataModel.FullName = formData.FullName;

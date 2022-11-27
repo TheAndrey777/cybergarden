@@ -33,7 +33,7 @@ namespace greenatom.Services ;
             return user is not null;
         }
 
-        public async Task<UserModel> FindUser(string username)
+        public async Task<UserModel?> FindUser(string username)
         {
             var user = await _usersCollection.Find(user => user.Username == username).FirstOrDefaultAsync();
             return user;

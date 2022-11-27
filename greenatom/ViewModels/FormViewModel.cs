@@ -1,6 +1,7 @@
 namespace greenatom.ViewModels ;
 
-    public class FormViewModel
+    [Serializable]
+    public record FormViewModel
     {
         public string FullName;
         public DateTime DateBirth;
@@ -14,6 +15,7 @@ namespace greenatom.ViewModels ;
         }
     }
 
+    [Serializable]
     public enum Occupation
     {
         Schoolboy,
@@ -24,6 +26,7 @@ namespace greenatom.ViewModels ;
         Pensioner,
     }
 
+    [Serializable]
     public enum FamiliarWithProgramming
     {
         Zero,
@@ -33,6 +36,7 @@ namespace greenatom.ViewModels ;
         YearsMoreThan5
     }
 
+    [Serializable]
     public enum MajorCommercialProjects
     {
         Zero,
