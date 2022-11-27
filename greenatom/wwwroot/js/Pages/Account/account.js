@@ -8,7 +8,16 @@ for (let i = 0; i < 6; i++) {
     titles[i] = document.getElementById(TITLE_KEY + i);
     states[i] = document.getElementById(STATE_KEY + i);
 }
+let buttons = [];
+for (let i = 0; i < 6; i++) {
+    buttons[i] = document.getElementById("button" + i);
+}
 
+let adminButton = document.getElementById("adminButton");
+messenger.get({address: "user", message: "", receive: (response) => {
+        if (response.data.roles === 'admin') adminButton.style.visibility = "";
+    }
+});
 messenger.get({address: "quiz/gettests", message: "",
     receive: (response) => {
         let tests = response.data.tests;

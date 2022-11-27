@@ -1,26 +1,9 @@
 let messenger = new Messenger();
+let toaster = new Toaster();
 let question = document.getElementById("question");
 let questionID = -1;
 
 let answers = [];
-console.log(question)
-
-build({
-    question: "Какой из перечисленных языков не является строго типизированным",
-    answers: [
-        "Java :)",
-        "Python",
-        "C++",
-        "Pascal",
-        "C"
-    ]
-});
-
-function load(name) {
-    messenger.sendPost({address: "quiz/get", message: name, receiver: (quiz) =>
-            console.log(quiz.data)
-    });
-}
 
 function build(quest) {
     questionID++;
