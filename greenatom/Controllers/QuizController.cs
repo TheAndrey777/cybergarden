@@ -31,24 +31,41 @@ namespace greenatom.Controllers ;
         }
 
         [HttpPost("/quiz/answers")]
-        public async Task<IActionResult> Answers([FromBody] List<List<string>> answers, string name)
+        [Authorize]
+        public async Task<IActionResult> Answers([FromBody] AnswerViewModel viewModel)
         {
+            var dbU = await _databaseService.FindUser(User.Identity.Name);
+            if (dbU == null)
+            {
+                Console.WriteLine("User Not Found");
+                return NotFound();
+            }
             int res = 0;
             float points;
-            var correctAns = await _databaseService.GetAnswers(name);
+            var correctAns = await _databaseService.GetAnswers(viewModel.TestName);
             int total = correctAns.Count();
 
-            foreach (var ans in correctAns.Zip(answers, (x, y) => (x, y)))
+            foreach (var ans in correctAns.Zip(viewModel.Answers, (x, y) => (x, y)))
                 if (ans.x.Intersect(ans.y).Count() == ans.x.Count())
                     res++;
 
             points = (float)res / (float)total * 100;
 
             Console.WriteLine($"Res: {res}. Points: {points}");
-            return Ok(new QuizResultModel { QuizName = name, Correct = res, Total = total, Points = (int)points });
+            dbU.ReadyTask.RemoveAll(t => t.Name == viewModel.TestName);
+            dbU.ReadyTask.Add(new TestHeader() { Name = viewModel.TestName, Wins = res });
+            await _databaseService.Updateuser(dbU);
+            return
+                Ok(new QuizResultModel
+                {
+                    QuizName = viewModel.TestName,
+                    Correct = res,
+                    Total = total,
+                    Points = (int)points
+                });
         }
 
-        [HttpPost("/quiz/gettests")]
+        [HttpGet("/quiz/gettests")]
         public async Task<AllTests> GetTests()
         {
             var res = await _databaseService.GetAllTests();

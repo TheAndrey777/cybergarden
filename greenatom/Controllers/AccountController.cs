@@ -115,5 +115,13 @@ namespace greenatom.Controllers
             await _databaseService.Updateuser(dbU);
             return new JsonResult(dbU);
         }
+
+        [HttpGet("getroles")]
+        [Authorize]
+        public async Task<RolesViewModel> GetRole()
+        {
+            UserModel? dbU = await _databaseService.FindUser(User.Identity!.Name!);
+            return new RolesViewModel() { Roles = dbU.Roles };
+        }
     }
 }

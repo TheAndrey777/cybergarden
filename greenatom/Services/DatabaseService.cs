@@ -64,6 +64,8 @@ namespace greenatom.Services ;
 
         public async Task AddQuiz(QuizModel quiz)
         {
+            if ((await GetQuiz(quiz.Name)) != null)
+                return;
             await _pollsCollection.InsertOneAsync(quiz);
         }
 
