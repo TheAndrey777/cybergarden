@@ -4,15 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace greenatom.Controllers
 {
     [ApiController]
-    [Route("/")]
+    [Route("/about")]
     [Authorize]
-    public class IndexController : ControllerBase
+    public class HelpController : ControllerBase
     {
-        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         public IActionResult GetHtml()
         {
-            return Content(System.IO.File.ReadAllText("wwwroot/form.html"), "text/html");
+            return Content(System.IO.File.ReadAllText("wwwroot/help.html"), "text/html");
         }
     }
 }

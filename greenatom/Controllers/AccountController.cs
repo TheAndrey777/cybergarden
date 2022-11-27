@@ -4,6 +4,7 @@ using greenatom.Services;
 using greenatom.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace greenatom.Controllers
@@ -72,10 +73,20 @@ namespace greenatom.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterViewModel viewModel)
         {
-            if (await _databaseService.FindUser(viewModel.Email)) return Ok();
+            if (await _databaseService.UserExist(viewModel.Email)) return Ok();
             await _databaseService.AddUser(new UserModel(viewModel.Email, viewModel.Password));
             await Authenticate(viewModel.Email);
             return Redirect("/");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> AccountHtml()
+        {
+            var dbU = await _databaseService.FindUser(User.Identity!.Name!);
+            if (dbU.Form.IsSet == false)
+                return Redirect("form");
+            return Content(System.IO.File.ReadAllText("wwwroot/account.html"), "text/html");
         }
     }
 }
