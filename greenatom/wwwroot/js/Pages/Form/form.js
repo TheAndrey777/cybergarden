@@ -1,5 +1,6 @@
-const INPUT_KEYS = ["name", "date"];
-const KEYS = ["occupation", "familiarWithProgramming", "majorCommercialProjects"];
+let messenger = new Messenger();
+const INPUT_KEYS = ["FullName", "DateBirth"];
+const KEYS = ["Occupation", "FamiliarWithProgramming", "MajorCommercialProjects"];
 let form = {};
 
 document.getElementById("sendButton").addEventListener("click", () => {
@@ -14,5 +15,12 @@ document.getElementById("sendButton").addEventListener("click", () => {
         }
         document.getElementById("name").value = form;
     });
-    console.log(form)
+    messenger.sendPost({address: "form", message: form,
+        receive: () => {
+        console.log("Well")
+        },
+        cache: () => {
+        console.log("Not well")
+        }
+    });
 });
