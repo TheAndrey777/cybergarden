@@ -14,9 +14,10 @@ messenger.get({address: "quiz/gettests", message: "",
         for (let i = 0; i < 6; i++) {
             messenger.sendPost({
                 address: "quiz/getready",
-                message:  '"' + tests[i] + '"',
+                message:  {name: tests[i]},
                 receive: (response) => {
-                    console.log(response.data)
+                    console.log(tests[i], response.data)    
+                    console.log(response)
                 },
                 cache: (error) => {
                     console.log(error)
