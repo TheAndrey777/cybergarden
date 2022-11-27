@@ -72,4 +72,10 @@ namespace greenatom.Services ;
             var data = await _pollsCollection.Find(poll => poll.Name == name).FirstOrDefaultAsync();
             return data.correctAnswers;
         }
+
+        public async Task<List<string>> GetAllTests()
+        {
+            var list = await (await _pollsCollection.FindAsync(_ => true)).ToListAsync();
+            return list.Select(q => q.Name).ToList();
+        }
     }

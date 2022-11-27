@@ -18,10 +18,17 @@ namespace greenatom.Models ;
         [BsonElement("formData")]
         public FormDataModel Form { get; set; }
 
+        [BsonElement("roles")]
+        public string Roles { get; set; }
+
+        [BsonElement("readyTask")]
+        public List<TestHeader> ReadyTask { get; set; }
+
         public UserModel(string username, string password)
         {
             Username = username;
             Password = password;
             Form = new FormDataModel();
+            ReadyTask = new();
         }
     }

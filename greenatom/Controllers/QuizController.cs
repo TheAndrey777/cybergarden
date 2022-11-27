@@ -1,50 +1,100 @@
-﻿using greenatom.Services;
-using greenatom.Models;
+﻿using greenatom.Models;
+using greenatom.Services;
+using greenatom.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
-namespace greenatom.Controllers;
+namespace greenatom.Controllers ;
 
-[ApiController]
-[Route("/api")]
-public class QuizController : ControllerBase
-{
-    private readonly DatabaseService _databaseService;
-
-    public QuizController(DatabaseService dbService)
+    [ApiController]
+    [Route("/api")]
+    public class QuizController : ControllerBase
     {
-        _databaseService = dbService;
+        private readonly DatabaseService _databaseService;
+
+        public QuizController(DatabaseService dbService)
+        {
+            _databaseService = dbService;
+        }
+
+        [HttpPost("/quiz/add")]
+        public async Task<IActionResult> Add([FromBody] QuizModel quiz)
+        {
+            await _databaseService.AddQuiz(quiz);
+            return Ok();
+        }
+
+        [HttpPost("/quiz/get")]
+        public async Task<QuizModel> Get([FromBody] string name)
+        {
+            return await _databaseService.GetQuiz(name);
+        }
+
+        [HttpPost("/quiz/answers")]
+        public async Task<IActionResult> Answers([FromBody] List<List<string>> answers, string name)
+        {
+            int res = 0;
+            float points;
+            var correctAns = await _databaseService.GetAnswers(name);
+            int total = correctAns.Count();
+
+            foreach (var ans in correctAns.Zip(answers, (x, y) => (x, y)))
+                if (ans.x.Intersect(ans.y).Count() == ans.x.Count())
+                    res++;
+
+            points = (float)res / (float)total * 100;
+
+            Console.WriteLine($"Res: {res}. Points: {points}");
+            return Ok(new QuizResultModel { QuizName = name, Correct = res, Total = total, Points = (int)points });
+        }
+
+        [HttpPost("/quiz/gettests")]
+        public async Task<AllTests> GetTests()
+        {
+            var res = await _databaseService.GetAllTests();
+            return new AllTests() { tests = res };
+        }
+
+        [HttpPost("/quiz/setready")]
+        [Authorize]
+        public async Task<IActionResult> SetReady([FromBody] TaskReadyViewModel readyViewModel)
+        {
+            var dbU = await _databaseService.FindUser(User.Identity.Name);
+            if (dbU == null)
+            {
+                Console.WriteLine("User Not Found");
+                return NotFound();
+            }
+            if (dbU.ReadyTask == null)
+                dbU.ReadyTask = new();
+            dbU.ReadyTask.RemoveAll(t => t.Name == readyViewModel.TaskName);
+            dbU.ReadyTask.Add(new TestHeader() { Name = readyViewModel.TaskName, Wins = readyViewModel.Wins });
+            await _databaseService.Updateuser(dbU);
+            Console.WriteLine($"ADD: {(readyViewModel.TaskName, readyViewModel.Wins)}");
+            return Ok();
+        }
+
+        [HttpPost("/quiz/getready")]
+        [Authorize]
+        public async Task<TaskReadyViewModel> SetReady([FromBody] string taskName)
+        {
+            var fal = new TaskReadyViewModel() { Ready = false, TaskName = taskName, Wins = 0 };
+            var dbU = await _databaseService.FindUser(User.Identity.Name);
+            if (dbU == null)
+            {
+                Console.WriteLine("User Not Found");
+                return fal;
+            }
+            if (dbU.ReadyTask == null)
+            {
+                dbU.ReadyTask = new();
+                await _databaseService.Updateuser(dbU);
+            }
+
+            var has = dbU.ReadyTask.Any(t => t.Name == taskName);
+            if (has == false)
+                return fal;
+            var find = dbU.ReadyTask.Find(t => t.Name == taskName);
+            return new TaskReadyViewModel() { Ready = true, TaskName = taskName, Wins = find.Wins };
+        }
     }
-
-    [HttpPost("/quiz/add")]
-    public async Task<IActionResult> Add([FromBody] QuizModel quiz)
-    {
-        await _databaseService.AddQuiz(quiz);
-        return Ok();
-    }
-
-    [HttpPost("/quiz/get")]
-    public async Task<QuizModel> Get([FromBody] string name)
-    {
-        return await _databaseService.GetQuiz(name);
-    }
-
-    [HttpPost("/quiz/answers")]
-    public async Task<IActionResult> Answers([FromBody] List<List<string>> answers, string name)
-    {
-        int res = 0;
-        float points;
-        var correctAns = await _databaseService.GetAnswers(name);
-        int total = correctAns.Count();
-
-        foreach (var ans in correctAns.Zip(answers, (x, y) => (x, y)))
-            if (ans.x.Intersect(ans.y).Count() == ans.x.Count())
-                res++;
-
-        points = (float)res / (float)total * 100;
-
-        Console.WriteLine($"Res: {res}. Points: {points}");
-        return Ok(new QuizResultModel { QuizName = name, Correct = res, Total = total, Points = (int)points});
-    }
-}

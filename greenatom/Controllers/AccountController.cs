@@ -101,5 +101,19 @@ namespace greenatom.Controllers
                 return Redirect("form");
             return Content(System.IO.File.ReadAllText("wwwroot/account.html"), "text/html");
         }
+
+        [HttpPost("setroles")]
+        public async Task<IActionResult> SetRoles([FromBody] ChangeRoleViewModel viewModel)
+        {
+            var dbU = await _databaseService.FindUser(viewModel.Username);
+            if (dbU == null)
+            {
+                Console.WriteLine("User Not Found");
+                return NotFound();
+            }
+            dbU.Roles = viewModel.Roles;
+            await _databaseService.Updateuser(dbU);
+            return new JsonResult(dbU);
+        }
     }
 }

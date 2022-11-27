@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace greenatom.Controllers
 {
     [ApiController]
+    [Route("/")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
