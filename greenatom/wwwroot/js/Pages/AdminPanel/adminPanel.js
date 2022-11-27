@@ -9,6 +9,7 @@ let quests = [{
         }],
     }
 ];
+
 let createButton = document.getElementById("createButton");
 createButton.addEventListener("click", () => {
     let quest = {};
@@ -16,9 +17,24 @@ createButton.addEventListener("click", () => {
     quest.div.className = "wrap-input100 validate-input";
     document.getElementById("buttonDiv").before(quest.div);
     quest.questionBox = document.createElement('input');
+    quest.questionBox.className = "input100";
+    quest.questionBox.placeholder = "Техт вопроса";
     quest.div.append(quest.questionBox);
+    let answerDiv = document.createElement('div');
+    quest.div.after(answerDiv);
+    quest.answers = [{
+        div: answerDiv,
+    }];
     quests.push(quest);
+    clicks[0](quest);
     questID++;
+});
+let removeButton = document.getElementById("removeButton");
+removeButton.addEventListener("click",  () => {
+    let quest = quests[questID];
+    quest.div.remove();
+    quest.answers.forEach(answer => answer.div.remove());
+    questID--;
 });
 let buttons = [
     document.getElementById("buttonAdd"),
@@ -33,7 +49,7 @@ let clicks = [
         let input = document.createElement('input');
         input.className = "input100";
         input.placeholder = "Вариант ответа";
-        question.div.after(div);
+        question.answers[question.answers.length - 1].div.after(div);
         question.answers.push({
             answer: input,
             div: div,
