@@ -1,5 +1,4 @@
 ﻿using greenatom.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -23,10 +22,27 @@ namespace greenatom.Services ;
             await _usersCollection.InsertOneAsync(user);
         }
 
-        public async Task<bool> FindUser(string username)
+        public async Task Updateuser(UserModel user)
+        {
+            await _usersCollection.ReplaceOneAsync(u => u.Id == user.Id, user, new ReplaceOptions { IsUpsert = true });
+        }
+
+        public async Task<bool> UserExist(string username)
         {
             var user = await _usersCollection.Find(user => user.Username == username).FirstOrDefaultAsync();
             return user is not null;
+        }
+
+        public async Task<UserModel?> FindUser(string username)
+        {
+            var user = await _usersCollection.Find(user => user.Username == username).FirstOrDefaultAsync();
+            return user;
+        }
+
+        public async Task<UserModel> FindUserById(string id)
+        {
+            var user = await _usersCollection.Find(user => user.Id == id).FirstOrDefaultAsync();
+            return user;
         }
 
         public async Task<bool> CheckPassword(string username, string password)
@@ -45,7 +61,7 @@ namespace greenatom.Services ;
 
             return data;
         }
-        
+
         public async Task AddQuiz(QuizModel quiz)
         {
             await _pollsCollection.InsertOneAsync(quiz);

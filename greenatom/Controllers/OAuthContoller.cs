@@ -34,7 +34,7 @@ namespace greenatom.Controllers
             Console.WriteLine($"Google:");
             var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
 
-            foreach (var pair in result.Ticket.Properties.Items)
+            foreach (var pair in result.Ticket!.Properties.Items)
             {
                 Console.WriteLine($"{pair.Key}: {pair.Value}");
             }
@@ -61,7 +61,7 @@ namespace greenatom.Controllers
             Console.WriteLine($"VK:");
             var result = await HttpContext.AuthenticateAsync(VkontakteAuthenticationDefaults.AuthenticationScheme);
 
-            foreach (var pair in result.Ticket.Properties.Items)
+            foreach (var pair in result.Ticket!.Properties.Items)
             {
                 Console.WriteLine($"{pair.Key}: {pair.Value}");
             }
@@ -88,7 +88,7 @@ namespace greenatom.Controllers
             Console.WriteLine($"Discord:");
             var result = await HttpContext.AuthenticateAsync(DiscordAuthenticationDefaults.AuthenticationScheme);
 
-            foreach (var pair in result.Ticket.Properties.Items)
+            foreach (var pair in result.Ticket!.Properties.Items)
             {
                 Console.WriteLine($"{pair.Key}: {pair.Value}");
             }
