@@ -1,10 +1,13 @@
 let messenger = new Messenger();
+let toaster = new Toaster();
 const INPUT_KEYS = ["FullName", "DateBirth"];
 const KEYS = ["Occupation", "FamiliarWithProgramming", "MajorCommercialProjects"];
 let form = {};
 
 document.getElementById("sendButton").addEventListener("click", () => {
-    INPUT_KEYS.forEach(key => form[key] = document.getElementById(key).value);
+    INPUT_KEYS.forEach(key => {
+        if (document.getElementById(key).value) form[key] = document.getElementById(key).value
+    });
     KEYS.forEach(key => {
         let count = document.getElementsByName(key).length;
         console.log(document.getElementsByName(key))
@@ -13,14 +16,17 @@ document.getElementById("sendButton").addEventListener("click", () => {
             if (!document.getElementById(key + i).checked) continue;
             form[key] = i;
         }
-        document.getElementById("name").value = form;
     });
-    messenger.sendPost({address: "form", message: form,
-        receive: () => {
-        console.log("Well")
-        },
-        cache: () => {
-        console.log("Not well")
-        }
-    });
+    console.log(Object.keys(form).length, KEYS.length + 2, Object.keys(form).length === KEYS.length + 2)
+    if (Object.keys(form).length === KEYS.length + 2)
+        messenger.sendPost({
+            address: "form", message: form,
+            receive: (response) => {
+                window.location = response.data.URL;
+            },
+            cache: () => {
+                console.log("Not well")
+            }
+        });
+    else toaster.addToast({message: "Заполните все поля", title: "Ошибка:", color: "red"});
 });

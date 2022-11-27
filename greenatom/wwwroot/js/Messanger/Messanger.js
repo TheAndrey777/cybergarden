@@ -14,6 +14,17 @@ class Messenger {
             });
     }
 
+    get(request) {
+        axios.get('/' + request.address, request.message)
+            .then((response) => {
+                if (request.receive) request.receive(response);
+            })
+            .catch((error) => {
+                if (request.cache) request.cache(error);
+                this.toaster.addToast({message: "Не удалось подключиться.", title: "Ошибка:", color: "red"});
+            });
+    }
+
     login(email, password) {
         this.sendPost({
             address: "login",
