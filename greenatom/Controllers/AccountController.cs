@@ -24,6 +24,8 @@ namespace greenatom.Controllers
         [HttpGet("login")]
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+                return Redirect("/");
             return this.Content(System.IO.File.ReadAllText("wwwroot/login.html"), "text/html");
         }
 
